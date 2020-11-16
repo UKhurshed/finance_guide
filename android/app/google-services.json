@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "832010440142",
+    "firebase_url": "https://finance-guide.firebaseio.com",
+    "project_id": "finance-guide",
+    "storage_bucket": "finance-guide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832010440142:android:1edd58632ba6ca23f76f9f",
+        "android_client_info": {
+          "package_name": "com.example.finance_guide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832010440142-bdsklpheg566h1a59ekq5ggo8bc1i8gh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4es-SYEm-XUKNBXcruDrCZagrzKRLSIA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "832010440142-bdsklpheg566h1a59ekq5ggo8bc1i8gh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
