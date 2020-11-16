@@ -23,8 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_auth: ^0.18.3
-  google_sign_in: ^4.5.6
+  bloc: ^6.1.0
+  flutter_bloc: ^6.1.1
+  formz: ^0.3.2
+  font_awesome_flutter: ^8.4.0
+  dio: ^3.0.10
+  pedantic: ^1.9.2
+  auth_repository:
+    path: packages/auth_repository
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -47,7 +53,7 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-   assets:
+  assets:
     - assets/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
