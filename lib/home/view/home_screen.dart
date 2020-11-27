@@ -16,7 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> pages = [
     QuoteBuilder(key: PageStorageKey('Quote'),),
-    NewsScreen(key: PageStorageKey('News'),)
+    News(key: PageStorageKey('News'),)
   ];
 
   final PageStorageBucket bucket = PageStorageBucket();

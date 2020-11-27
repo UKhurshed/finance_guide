@@ -9,7 +9,7 @@ class QuoteCubit extends Cubit<QuoteState> {
 
   QuoteCubit(this.quoteRepository) : super(QuoteInitial());
 
-  Future<void> getQuote() async{
+  Future<void> getQuote(String sym) async{
     try{
       emit(QuoteLoading());
       final quote = await quoteRepository.getQuote();
