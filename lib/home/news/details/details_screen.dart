@@ -16,10 +16,9 @@ class DetailsPage extends StatelessWidget {
 }
 
 
-
 class DetailsScreen extends StatelessWidget {
   final Article article;
-  static final routeName = 'Details';
+  // static final routeName = 'Details';
 
   const DetailsScreen({this.article});
 

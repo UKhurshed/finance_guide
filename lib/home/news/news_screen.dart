@@ -1,4 +1,3 @@
-import 'package:finance_guide/home/details/details_screen.dart';
 import 'package:finance_guide/home/news/news.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,7 +47,8 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: BlocBuilder<NewsCubit, NewsState>(
+    return Scaffold(
+        body: BlocBuilder<NewsCubit, NewsState>(
       builder: (context, state) {
         if (state is NewsError) {
           Scaffold.of(context).showSnackBar(SnackBar(
@@ -121,6 +121,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
   _onNewsTap(Article article) {
     // Navigator.pushNamed(context, DetailsScreen.routeName);
+
     Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsPage(), settings: RouteSettings(arguments: DetailsArgument(article))));
   }
 

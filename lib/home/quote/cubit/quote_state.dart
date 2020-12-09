@@ -15,6 +15,7 @@ class QuoteLoading extends QuoteState{
 
 class QuoteLoaded extends QuoteState{
   final List<Quote> quote;
+  // final Quote quote;
   const QuoteLoaded(this.quote);
 }
 
