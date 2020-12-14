@@ -1,17 +1,17 @@
 import 'dart:convert';
 
-QuoteHistorical quoteDetailsFromJson(String str) => QuoteHistorical.fromJson(json.decode(str));
+Item itemFromJson(String str) => Item.fromJson(json.decode(str));
 
-String quoteDetailsToJson(QuoteHistorical data) => json.encode(data.toJson());
+String itemToJson(Item data) => json.encode(data.toJson());
 
-class QuoteHistorical {
-  QuoteHistorical({
+class Item {
+  Item({
     this.history,
   });
 
   History history;
 
-  factory QuoteHistorical.fromJson(Map<String, dynamic> json) => QuoteHistorical(
+  factory Item.fromJson(Map<String, dynamic> json) => Item(
     history: History.fromJson(json["history"]),
   );
 
@@ -38,36 +38,32 @@ class History {
 
 class Day {
   Day({
-    this.date,
     this.open,
     this.high,
     this.low,
     this.close,
-    this.volume,
+    this.volumeto,
   });
 
-  DateTime date;
   double open;
   double high;
   double low;
   double close;
-  int volume;
+  int volumeto;
 
   factory Day.fromJson(Map<String, dynamic> json) => Day(
-    date: DateTime.parse(json["date"]),
     open: json["open"].toDouble(),
     high: json["high"].toDouble(),
     low: json["low"].toDouble(),
     close: json["close"].toDouble(),
-    volume: json["volume"],
+    volumeto: json["volume"],
   );
 
   Map<String, dynamic> toJson() => {
-    "date": "${date.year.toString().padLeft(4, '0')}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}",
     "open": open,
     "high": high,
     "low": low,
     "close": close,
-    "volume": volume,
+    "volumeto": volumeto,
   };
 }

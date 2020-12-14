@@ -14,8 +14,8 @@ class QuoteDetailsLoading extends QuoteDetailsState{
 }
 
 class QuoteDetailsLoaded extends QuoteDetailsState{
-  final QuoteHistorical quoteHistorical;
-  QuoteDetailsLoaded(this.quoteHistorical);
+  final Item items;
+  QuoteDetailsLoaded(this.items);
 }
 
 class QuoteDetailsError extends QuoteDetailsState{

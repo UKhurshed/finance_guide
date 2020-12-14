@@ -25,45 +25,13 @@ class QuoteScreen extends StatefulWidget {
 class _QuoteScreenState extends State<QuoteScreen> {
   TextEditingController textEdit = TextEditingController();
 
-/*
-     if (state is QuoteError) {
-          // Scaffold.of(context).showSnackBar(SnackBar(
-          //   content: Text('Error'),
-          //   backgroundColor: Colors.red,
-          //   duration: Duration(seconds: 2),
-          // ));
-          return InputField();
-        }
-        if (state is QuoteInitial) {
-          return InputField();
-        }
-        if (state is QuoteLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is QuoteLoaded) {
-          return
-            ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: state.quote.length,
-                itemBuilder: (context, index) {
-                  Quote quote = state.quote[index];
-                  return ListTile(
-                    title: Text(quote.change.toString() ?? '0.0',),
-                    leading: Text(quote.symbol ?? 'sym'),
-                    trailing: Text(quote.changePercent.toString() ?? '%', style: quote.changePercent < 0 ? TextStyle(color: Colors.red) : TextStyle(color: Colors.green)),
-                  );
-                });
-        }
-        return Text('Else');
- */
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: AppDrawer(),
-      appBar: AppBar(title: Text('Quotes'),),
+      appBar: AppBar(
+        title: Text('Quotes'),
+      ),
       body: SingleChildScrollView(
         child: Container(
           // padding: const EdgeInsets.only(top: 10),
@@ -78,74 +46,72 @@ class _QuoteScreenState extends State<QuoteScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is QuoteLoaded) {
-              return
-              // Quote quote = state.quote;
-              // return ListTile(
-              //   title: Text(quote.change.toString() ?? '0.0'),
-              //   leading: Text(quote.symbol ?? 'sym'),
-              //   trailing: Text(quote.changePercent.toString() ?? '%',
-              //       style: quote.changePercent < 0
-              //           ? TextStyle(color: Colors.red)
-              //           : TextStyle(color: Colors.green)),
-              // );
-              ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: state.quote.length,
-                  itemBuilder: (context, index) {
-                    Quote quote = state.quote[index];
-                    return InkWell(
-                      onTap: (){
-                       Navigator.push(context, MaterialPageRoute(builder: (context) => Details(quote)));
-                      },
-                      child: Card(
-                        color: Colors.grey[200],
-                        child: ListTile(
-                          title: Text(quote.change.toString() ?? '0.0', style: TextStyle(fontSize: 16),),
-                          leading: Text(quote.symbol ?? 'sym', style: TextStyle(fontWeight: FontWeight.bold),),
-                          trailing: Text(quote.changePercent.toString() ?? '%', style: quote.changePercent < 0 ? TextStyle(color: Colors.red, fontSize: 18) : TextStyle(color: Colors.green, fontSize: 18)),
-                        ),
-                      ),
-                    );
-                  });
-              //   ListView.separated(
-              //       scrollDirection: Axis.vertical,
-              //       shrinkWrap: true,
-              //       itemCount: state.quote.length,
-              //       itemBuilder: (context, index) {
-              //         Quote quote = state.quote[index];
-              //         return ListTile(
-              //           title: Text(quote.change.toString() ?? '0.0',),
-              //           leading: Text(quote.symbol ?? 'sym'),
-              //           trailing: Text(quote.changePercent.toString() ?? '%', style: quote.changePercent < 0 ? TextStyle(color: Colors.red) : TextStyle(color: Colors.green)),
-              //         );
-              //       },
-              //     separatorBuilder: (context, index){
-              //         return Divider();
-              //     },
-              //       );
+              return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: state.quote.length,
+                      itemBuilder: (context, index) {
+                        Quote quote = state.quote[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Details(quote)));
+                          },
+                          child: Card(
+                            color: Colors.grey[200],
+                            child: ListTile(
+                                leading: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      quote.companyName ?? 'sym',
+                                      maxLines: 1,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(quote.latestTime.toString())
+                                  ],
+                                ),
+                                trailing: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 12,
+                                    ),
+                                    Text(quote.latestPrice.toString()),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    quote.change < 0
+                                        ? Text(
+                                            "(${quote.changePercent}%)",
+                                            style: TextStyle(color: Colors.red),
+                                          )
+                                        : Text("(+${quote.changePercent}%)",
+                                            style:
+                                                TextStyle(color: Colors.green)),
+                                    // SizedBox(height: 5,),
+                                    // Text(quote.changePercent.toString() ?? '%', style: quote.changePercent < 0 ? TextStyle(color: Colors.red, fontSize: 18) : TextStyle(color: Colors.green, fontSize: 18)),
+                                  ],
+                                )),
+                          ),
+                        );
+                      });
             } else {
               return inputField();
             }
           }),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     // submitSymbol(context, textEdit.text);
-      //     final quoteCubit = context.read<QuoteCubit>();
-      //     quoteCubit.getQuote('aapl');
-      //   },
-      //   child: Icon(Icons.search),
-      // ),
     );
   }
-
-
-
-  // _quoteDetails(Quote quote){
-  //   Navigator.push(context, MaterialPageRoute(builder: (context) => QuoteDetailsPage(), settings: RouteSettings(arguments: QuoteDetailsArgument(quote))));
-  // }
 
   @override
   void initState() {
