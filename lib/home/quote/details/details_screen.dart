@@ -136,30 +136,131 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                 }
               }),
           SizedBox(height: 10,),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              InkWell(
-                onTap: (){},
-                child: Text('1н', style: TextStyle(fontSize: 16)),
+          buildChoiceHistory(context),
+          SizedBox(height: 10,),
+          Padding(
+            padding: const EdgeInsets.all(1.0),
+            child:
+            // Center(
+            //   child:
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Row(
+                  //   children: [
+                  //     Text('Биржа'),
+                  //     SizedBox(width: 50,),
+                  //     Text(quote.primaryExchange)
+                  //   ],
+                  // ),
+                  // SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Последний объем'),
+                      SizedBox(width: 50,),
+                      Text(quote.latestVolume.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Предыдущий объем'),
+                      SizedBox(width: 50,),
+                      Text(quote.previousVolume.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Средний объем'),
+                      SizedBox(width: 50,),
+                      Text(quote.latestVolume.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Последняя цена'),
+                      SizedBox(width: 50,),
+                      Text(quote.latestPrice.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Открытие'),
+                      SizedBox(width: 50,),
+                      Text(quote.open.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Закрытие'),
+                      SizedBox(width: 50,),
+                      Text(quote.close.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Предыдущая закрытия'),
+                      SizedBox(width: 50,),
+                      Text(quote.previousClose.toString())
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Цена/доход'),
+                      SizedBox(width: 50,),
+                      Text(quote.peRatio.toString())
+                    ],
+                  ),
+                ],
               ),
-              InkWell(
-                onTap: (){},
-                child: Text('1м', style: TextStyle(fontSize: 16),),
-              ),
-              InkWell(
-                onTap: (){},
-                child: Text('1г', style: TextStyle(fontSize: 16)),
-              ),
-              InkWell(
-                onTap: (){},
-                child: Text('5л', style: TextStyle(fontSize: 16)),
-              ),
-            ],
+            // ),
           )
         ],
       ),
     );
+  }
+
+  Row buildChoiceHistory(BuildContext context) {
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            InkWell(
+              onTap: (){
+                final detailsQuote = context.read<QuoteDetailsCubit>();
+                detailsQuote.getMonthly(quote.symbol);
+              },
+              child: Text('1м', style: TextStyle(fontSize: 16),),
+            ),
+            InkWell(
+              onTap: (){
+                final detailsQuote = context.read<QuoteDetailsCubit>();
+                detailsQuote.getYear(quote.symbol);
+              },
+              child: Text('1г', style: TextStyle(fontSize: 16)),
+            ),
+            InkWell(
+              onTap: (){
+                final detailsQuote = context.read<QuoteDetailsCubit>();
+                detailsQuote.getFiveYear(quote.symbol);
+              },
+              child: Text('5л', style: TextStyle(fontSize: 16)),
+            ),
+          ],
+        );
   }
 }
 

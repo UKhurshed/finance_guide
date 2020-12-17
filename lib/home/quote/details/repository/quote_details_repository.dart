@@ -47,8 +47,8 @@ class HistoryRepository {
 
 
   Future<Item> getMonthly(String sym) async {
-    String interval = "weekly";
-    String start = "2019-12-01";
+    String interval = "daily";
+    String start = "2020-11-14";
     String end = "2020-12-14";
 
     Item items = Item();
@@ -79,7 +79,7 @@ class HistoryRepository {
   }
 
   Future<Item> getYear(String sym) async {
-    String interval = "monthly";
+    String interval = "daily";
     String start = "2019-12-01";
     String end = "2020-12-14";
 
