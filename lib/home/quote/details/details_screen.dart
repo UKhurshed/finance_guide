@@ -3,6 +3,7 @@ import 'package:finance_guide/home/quote/details/details.dart';
 import 'package:finance_guide/home/quote/details/model/quote_historical.dart';
 import 'package:finance_guide/home/quote/details/repository/quote_details_repository.dart';
 import 'package:finance_guide/home/quote/quote.dart';
+import 'package:finance_guide/home/quote/technical_indicators/technical_indicators_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +57,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   void initState() {
     super.initState();
     final detailsQuote = context.read<QuoteDetailsCubit>();
-    debugPrint("${quote.symbol}");
+    debugPrint("Sym ${quote.symbol}");
     detailsQuote.getFiveYear(quote.symbol);
   }
 
@@ -146,14 +147,6 @@ class _QuoteDetailsState extends State<QuoteDetails> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Row(
-                  //   children: [
-                  //     Text('Биржа'),
-                  //     SizedBox(width: 50,),
-                  //     Text(quote.primaryExchange)
-                  //   ],
-                  // ),
-                  // SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -224,6 +217,21 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                       SizedBox(width: 50,),
                       Text(quote.peRatio.toString())
                     ],
+                  ),
+                  SizedBox(height: 30,),
+
+                  Center(
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0),
+                          // side: BorderSide(color: Colors.red)
+                      ),
+                      child: Text('Теханализ', style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),),
+                      color: Colors.green,
+                      onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => TechnicalIndicatorsScreen(quote.symbol)));
+                      },
+                    ),
                   ),
                 ],
               ),
