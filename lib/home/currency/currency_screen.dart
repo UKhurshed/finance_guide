@@ -1,4 +1,5 @@
 import 'package:finance_guide/home/currency/cubit/currency_cubit.dart';
+import 'package:finance_guide/home/currency/details/currency_detail_screen.dart';
 import 'package:finance_guide/home/currency/repository/currency_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,17 +69,20 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
               scrollDirection: Axis.vertical,
               itemCount: currency.length,
               itemBuilder: (context, index) {
-                return Card(
-                  color: Colors.black87,
-                  child: ListTile(
-                    title: Text(
-                      entries.elementAt(index).value.toString(),
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => CurrDetailScreen(entries.elementAt(index).key)));
+                  },
+                  child: Card(
+                    // color: Colors.black87,
+                    child: ListTile(
+                      title: Text(
+                        entries.elementAt(index).value.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      leading: Text(entries.elementAt(index).key,
+                          style: TextStyle(fontWeight: FontWeight.bold)),
                     ),
-                    leading: Text(entries.elementAt(index).key,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ),
                 );
               });

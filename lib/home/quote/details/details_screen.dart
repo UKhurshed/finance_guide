@@ -65,7 +65,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
         title: Text(quote.companyName ?? ''),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: resume != null ? Column(
           children: [
             Container(
                 child: Row(
@@ -179,7 +179,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
               // ),
             )
           ],
-        ),
+        ) : Center(child: CircularProgressIndicator(),),
       ),
     );
   }
@@ -240,7 +240,6 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   }
 
   void fetchElements(WebScraper webScraper) {
-    // List allStr = new List();
 
     setState(() {
       resume = webScraper.getElement('div.summary', [])[0]['title'].toString();
@@ -269,7 +268,6 @@ class _QuoteDetailsState extends State<QuoteDetails> {
       debugPrint("IndiVal: $indiValues");
       debugPrint("Act: $actions");
     });
-
   }
 
   Row buildChoiceHistory(BuildContext context) {
