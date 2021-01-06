@@ -1,6 +1,7 @@
 import 'package:finance_guide/home/currency/cubit/currency_cubit.dart';
 import 'package:finance_guide/home/currency/details/currency_detail_screen.dart';
 import 'package:finance_guide/home/currency/repository/currency_repository.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,8 +44,9 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       appBar: AppBar(
-        title: Text('Currency'),
+        title: Text('Форекс'),
       ),
       body:
           BlocBuilder<CurrencyCubit, CurrencyState>(builder: (context, state) {
@@ -64,7 +66,8 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
         if (state is CurrencyLoaded) {
           var currency = state.currency.rates;
           var entries = currency.entries.toList();
-          return ListView.builder(
+          return ListView.separated(
+              separatorBuilder: (context, index) => Divider(color: kItemUnSelected,  ),
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: currency.length,
@@ -73,17 +76,19 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => CurrDetailScreen(entries.elementAt(index).key)));
                   },
-                  child: Card(
-                    // color: Colors.black87,
-                    child: ListTile(
+                  child:
+                  // Card(
+                  //   // color: Colors.black87,
+                  //   child:
+                    ListTile(
                       title: Text(
                         entries.elementAt(index).value.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                       leading: Text(entries.elementAt(index).key,
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                     ),
-                  ),
+                  // ),
                 );
               });
         } else {

@@ -2,6 +2,7 @@ import 'package:finance_guide/home/quote/details/cubit/quote_details_cubit.dart'
 import 'package:finance_guide/home/quote/details/details.dart';
 import 'package:finance_guide/home/quote/details/repository/quote_details_repository.dart';
 import 'package:finance_guide/home/quote/quote.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,8 +62,9 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       appBar: AppBar(
-        title: Text(quote.companyName ?? ''),
+        title: Text(quote.companyName ?? '', style: TextStyle(color: kItemUnSelected),),
       ),
       body: SingleChildScrollView(
         child: resume != null ? Column(
@@ -75,7 +77,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                         leading: quote.changePercent < 0 ? Icon(Icons.trending_down, color: Colors.red, size: 35,) : Icon(Icons.trending_up, color: Colors.green, size: 35),
                         title: Row(
                           children: [
-                            Text(quote.latestPrice.toString(),style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),),
+                            Text(quote.latestPrice.toString(),style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24,color: Colors.white),),
                             SizedBox(width: 10,),
                             quote.change < 0 ? Text("${quote.change}", style: TextStyle(color: Colors.red),) : Text("+${quote.change}",style: TextStyle(color: Colors.green) ),
                             SizedBox(width: 10,),
@@ -149,23 +151,24 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                     Center(
                         child: Column(
                           children: [
-                            Text(resume ?? ''),
+                            Text(resume ?? '', style: TextStyle(color: Colors.white)),
                             SizedBox(
                               height: 5,
                             ),
-                            Text('Технические индикаторы'),
+                            Text('Технические индикаторы', style: TextStyle(color: Colors.white)),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
-                              child: ListView.builder(
+                              child: ListView.separated(
+                                  separatorBuilder: (context, indext) => Divider(color: kItemUnSelected,),
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   itemCount: indi.length,
                                   itemBuilder: (context, index) {
                                     return ListTile(
-                                      leading: Text(indi[index]),
-                                      title: Text(indiValues[index]),
-                                      trailing: Text(actions[index]),
+                                      leading: Text(indi[index], style: TextStyle(color: Colors.white),),
+                                      title: Text(indiValues[index], style: TextStyle(color: Colors.white)),
+                                      trailing: Text(actions[index], style: TextStyle(color: Colors.white)),
                                     );
                                   }),
 
@@ -279,21 +282,21 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                 final detailsQuote = context.read<QuoteDetailsCubit>();
                 detailsQuote.getMonthly(quote.symbol);
               },
-              child: Text('1м', style: TextStyle(fontSize: 16),),
+              child: Text('1м', style: TextStyle(fontSize: 16, color: Colors.white),),
             ),
             InkWell(
               onTap: (){
                 final detailsQuote = context.read<QuoteDetailsCubit>();
                 detailsQuote.getYear(quote.symbol);
               },
-              child: Text('1г', style: TextStyle(fontSize: 16)),
+              child: Text('1г', style: TextStyle(fontSize: 16, color: Colors.white)),
             ),
             InkWell(
               onTap: (){
                 final detailsQuote = context.read<QuoteDetailsCubit>();
                 detailsQuote.getFiveYear(quote.symbol);
               },
-              child: Text('5л', style: TextStyle(fontSize: 16)),
+              child: Text('5л', style: TextStyle(fontSize: 16,color: Colors.white)),
             ),
           ],
         );

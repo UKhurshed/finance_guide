@@ -1,5 +1,7 @@
+import 'package:finance_guide/home/currency/details/currency_details.dart';
 import 'package:finance_guide/home/drawer/drawer.dart';
 import 'package:finance_guide/home/quote/quote.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,9 +30,10 @@ class _QuoteScreenState extends State<QuoteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       drawer: AppDrawer(),
       appBar: AppBar(
-        title: Text('Quotes'),
+        title: Text('Акции'),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -46,7 +49,8 @@ class _QuoteScreenState extends State<QuoteScreen> {
                 child: CircularProgressIndicator(),
               );
             } else if (state is QuoteLoaded) {
-              return ListView.builder(
+              return ListView.separated(
+                      separatorBuilder: (context, index) => Divider(color: kItemUnSelected,),
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
                       itemCount: state.quote.length,
@@ -59,9 +63,11 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                 MaterialPageRoute(
                                     builder: (context) => Details(quote)));
                           },
-                          child: Card(
-                            color: Colors.grey[200],
-                            child: ListTile(
+                          child:
+                          // Card(
+                          //   color: Colors.grey[200],
+                          //   child:
+                            ListTile(
                                 leading: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -72,12 +78,12 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                       quote.companyName ?? 'sym',
                                       maxLines: 1,
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold, color: Colors.white),
                                     ),
                                     SizedBox(
                                       height: 5,
                                     ),
-                                    Text(quote.latestTime.toString())
+                                    Text(quote.latestTime.toString(), style: TextStyle(color: Colors.white),)
                                   ],
                                 ),
                                 trailing: Column(
@@ -85,7 +91,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                     SizedBox(
                                       height: 12,
                                     ),
-                                    Text(quote.latestPrice.toString()),
+                                    Text(quote.latestPrice.toString(),style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                                     SizedBox(
                                       width: 10,
                                     ),
@@ -101,7 +107,7 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                     // Text(quote.changePercent.toString() ?? '%', style: quote.changePercent < 0 ? TextStyle(color: Colors.red, fontSize: 18) : TextStyle(color: Colors.green, fontSize: 18)),
                                   ],
                                 )),
-                          ),
+                          // ),
                         );
                       });
             } else {

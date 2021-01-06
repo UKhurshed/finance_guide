@@ -1,6 +1,5 @@
-import 'dart:ffi';
-
 import 'package:finance_guide/home/currency/details/cubit/curr_detail_cubit.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:web_scraper/web_scraper.dart';
@@ -63,6 +62,7 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       appBar: AppBar(
         title: Text('USD/$symbol'),
       ),
@@ -76,7 +76,7 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
                       leading: double.parse(change) < 0 ? Icon(Icons.trending_down, color: Colors.red, size: 35,) : Icon(Icons.trending_up, color: Colors.green, size: 35),
                       title: Row(
                         children: [
-                          Text(currentRate,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),),
+                          Text(currentRate,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),),
                           SizedBox(width: 10,),
                           double.parse(change) < 0 ? Text("$change", style: TextStyle(color: Colors.red),) : Text("$change",style: TextStyle(color: Colors.green) ),
                           SizedBox(width: 10,),
@@ -145,23 +145,24 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
             Center(
               child: Column(
                 children: [
-                  Text(resume ?? ''),
+                  Text(resume ?? '', style: TextStyle(color: Colors.white)),
                   SizedBox(
                     height: 5,
                   ),
-                  Text('Технические индикаторы'),
+                  Text('Технические индикаторы', style: TextStyle(color: Colors.white),),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child: ListView.builder(
+                    child: ListView.separated(
+                        separatorBuilder: (context, index) => Divider(color: kItemUnSelected,),
                         physics: BouncingScrollPhysics(),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         itemCount: indi.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                            leading: Text(indi[index]),
-                            title: Text(indiValues[index]),
-                            trailing: Text(actions[index]),
+                            leading: Text(indi[index], style: TextStyle(color: Colors.white)),
+                            title: Text(indiValues[index], style: TextStyle(color: Colors.white)),
+                            trailing: Text(actions[index], style: TextStyle(color: Colors.white)),
                           );
                         }),
 
@@ -187,7 +188,7 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
           },
           child: Text(
             '1н',
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 16, color: Colors.white),
           ),
         ),
         InkWell(
@@ -195,21 +196,21 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
             final currDetail = context.read<CurrDetailCubit>();
             currDetail.getWeekly(symbol);
           },
-          child: Text('1м', style: TextStyle(fontSize: 16)),
+          child: Text('1м', style: TextStyle(fontSize: 16, color: Colors.white)),
         ),
         InkWell(
           onTap: () {
             final currDetail = context.read<CurrDetailCubit>();
             currDetail.getYearly(symbol);
           },
-          child: Text('1г', style: TextStyle(fontSize: 16)),
+          child: Text('1г', style: TextStyle(fontSize: 16, color: Colors.white)),
         ),
         InkWell(
           onTap: () {
             final currDetail = context.read<CurrDetailCubit>();
             currDetail.getFiveYearly(symbol);
           },
-          child: Text('5л', style: TextStyle(fontSize: 16)),
+          child: Text('5л', style: TextStyle(fontSize: 16, color: Colors.white)),
         ),
       ],
     );

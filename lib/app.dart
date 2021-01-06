@@ -2,6 +2,7 @@ import 'package:auth_repository/auth_repository.dart';
 import 'package:finance_guide/authentication/authentication.dart';
 import 'package:finance_guide/home/home.dart';
 import 'package:finance_guide/splash/view/splash_screen.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,10 +42,9 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme:ThemeData(
-      //   primaryColor: Color(0xff6a515e),
-      //   cursorColor: Color(0xff6a515e),
-      // ),
+      theme:ThemeData(
+        primaryColor: kAppBar,
+      ),
       navigatorKey: _navigatorKey,
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(

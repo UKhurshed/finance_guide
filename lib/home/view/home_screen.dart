@@ -2,6 +2,7 @@ import 'package:finance_guide/home/currency/currency_screen.dart';
 import 'package:finance_guide/home/drawer/drawer.dart';
 import 'package:finance_guide/home/news/news.dart';
 import 'package:finance_guide/home/quote/quote.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,25 +40,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _bottomNavigationBar(int currentIndex) => BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.blue[600],
-          unselectedItemColor: Colors.black,
+          selectedItemColor: kItemSelected,
+          unselectedItemColor: kItemUnSelected,
           onTap: (int index) => setState(() => _currentIndex = index),
           currentIndex: currentIndex,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.leaderboard), label: 'Quotation'),
+                icon: Icon(Icons.leaderboard), label: ""),
             BottomNavigationBarItem(
-                icon: Icon(Icons.monetization_on), label: 'Currency'),
+                icon: Icon(Icons.monetization_on), label: ''),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.textsms,
                 ),
-                label: 'News'),
+                label: ''),
           ]);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       // drawer: AppDrawer(),
       bottomNavigationBar: _bottomNavigationBar(_currentIndex),
       // appBar: AppBar(
