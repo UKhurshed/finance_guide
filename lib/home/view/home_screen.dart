@@ -26,15 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  // final List<Widget> pages = [
-  //   QuoteBuilder(
-  //     key: PageStorageKey('Quote'),
-  //   ),
-  //   News(
-  //     key: PageStorageKey('News'),
-  //   )
-  // ];
-
   final PageStorageBucket bucket = PageStorageBucket();
   int _currentIndex = 0;
 
@@ -46,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           currentIndex: currentIndex,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.leaderboard), label: ""),
+                icon: ImageIcon(AssetImage("assets/launcher/quotes.png")),  label: ""),
             BottomNavigationBarItem(
                 icon: Icon(Icons.monetization_on), label: ''),
             BottomNavigationBarItem(

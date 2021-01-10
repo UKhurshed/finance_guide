@@ -6,6 +6,85 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 
+/*
+Container(
+                  height: 46,
+                  margin: const EdgeInsets.only(left: 37, right: 38),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: "E-mail или Телефон",
+                        hintStyle: TextStyle(color: kHintColor, fontSize: 13),
+                        border: OutlineInputBorder()),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 37),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Зарегистрироваться",
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: kYellowSignUp,
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 46,
+                  margin: const EdgeInsets.only(left: 37, right: 38),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Colors.white,
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: "Пароль",
+                        hintStyle: TextStyle(
+                            color: kHintColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400),
+                        border: OutlineInputBorder()),
+                  ),
+                ),
+                SizedBox(
+                  height: 35,
+                ),
+                Container(
+                  height: 48,
+                  width: 146,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    onPressed: () {},
+                    color: Colors.white,
+                    child: Text(
+                      "Вход",
+                      style: TextStyle(
+                          color: kHintColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Забыли пароль?",
+                  style: TextStyle(color: kForgetPass, fontSize: 14),
+                )
+ */
+
 class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +129,7 @@ class _EmailInput extends StatelessWidget {
                 context.read<LoginCubit>().emailChanged(email),
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              labelText: 'email',
+              labelText: 'E-mail или Телефон',
               helperText: '',
               errorText: state.email.invalid ? 'invalid email' : null,
             ),
