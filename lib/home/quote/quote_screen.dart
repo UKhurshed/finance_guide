@@ -97,10 +97,10 @@ class _QuoteScreenState extends State<QuoteScreen> {
                                     ),
                                     quote.change < 0
                                         ? Text(
-                                            "(${quote.changePercent}%)",
+                                            "(${quote.changePercent.toString()}%)",
                                             style: TextStyle(color: Colors.red),
                                           )
-                                        : Text("(+${quote.changePercent}%)",
+                                        : Text("(+${quote.changePercent.toString()}%)",
                                             style:
                                                 TextStyle(color: Colors.green)),
                                     // SizedBox(height: 5,),
