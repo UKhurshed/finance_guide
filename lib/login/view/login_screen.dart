@@ -2,9 +2,10 @@ import 'package:auth_repository/auth_repository.dart';
 import 'package:finance_guide/home/currency/details/currency_details.dart';
 import 'package:finance_guide/login/login.dart';
 import 'package:finance_guide/utils/constants.dart';
-import 'package:finance_guide/widgets/curved_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 
 class LoginScreen extends StatelessWidget {
   static Route route() {
@@ -43,10 +44,13 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.w400, fontSize: 32, color: kWhite),
                 ),
-                SizedBox(
-                  height: 140,
-                ),
-
+                // SizedBox(
+                //   height: 140,
+                // ),
+                Container(
+                  margin: const EdgeInsets.only(top: 120),
+                  child: LoginForm(),
+                )
               ],
             ),
           ),
