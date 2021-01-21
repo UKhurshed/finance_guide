@@ -1,7 +1,6 @@
 import 'package:finance_guide/login/cubit/login_cubit.dart';
 import 'package:finance_guide/sign_up/view/sign_up_screen.dart';
 import 'package:finance_guide/utils/constants.dart';
-import 'package:finance_guide/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -27,17 +26,6 @@ class LoginForm extends StatelessWidget {
             height: 10,
           ),
           _SignUpButton(),
-          // Container(
-          //   margin: const EdgeInsets.only(left: 37),
-          //   alignment: Alignment.centerLeft,
-          //   child: Text(
-          //     "Зарегистрироваться",
-          //     style: TextStyle(
-          //         fontSize: 13,
-          //         color: kYellowSignUp,
-          //         fontWeight: FontWeight.w400),
-          //   ),
-          // ),
           SizedBox(
             height: 10,
           ),
@@ -105,7 +93,6 @@ class _PasswordInput extends StatelessWidget {
               key: const Key('loginForm_passwordInput_textField'),
               onChanged: (password) =>
                   context.read<LoginCubit>().passwordChanged(password),
-              keyboardType: TextInputType.emailAddress,
               obscureText: true,
               decoration: InputDecoration(
                   hintText: "Пароль",
@@ -114,7 +101,8 @@ class _PasswordInput extends StatelessWidget {
                       fontSize: 13,
                       fontWeight: FontWeight.w400),
                   // helperText: '',
-                  errorText: state.email.invalid ? 'invalid password' : null,
+                  // errorText: state.email.invalid ? 'invalid password' : null,
+                  // errorText: state.password.invalid ? 'invalid password' : null,
                   border: OutlineInputBorder()),
             ),
           );

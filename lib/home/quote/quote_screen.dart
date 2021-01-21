@@ -31,7 +31,6 @@ class _QuoteScreenState extends State<QuoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackground,
-      drawer: AppDrawer(),
       appBar: AppBar(
         title: Text('Акции'),
       ),
