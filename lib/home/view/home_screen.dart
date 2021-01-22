@@ -1,5 +1,6 @@
 import 'package:finance_guide/home/currency/currency_screen.dart';
 import 'package:finance_guide/home/drawer/drawer.dart';
+import 'package:finance_guide/home/guide/guide_screen.dart';
 import 'package:finance_guide/home/news/news.dart';
 import 'package:finance_guide/home/quote/quote.dart';
 import 'package:finance_guide/home/user_page/user_page_screen.dart';
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     pageList.add(Currency());
     pageList.add(News());
     pageList.add(UserPageScreen());
+    pageList.add(GuideScreen());
     super.initState();
   }
 
@@ -47,7 +49,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icons.textsms,
                 ),
                 label: ''),
-            BottomNavigationBarItem(icon: ImageIcon(AssetImage("assets/launcher/user.png")), label: "")
+            BottomNavigationBarItem(icon: ImageIcon(AssetImage("assets/launcher/user.png")), label: ""),
+            BottomNavigationBarItem(icon: Icon(Icons.speaker_notes), label: "")
           ]);
 
   @override
