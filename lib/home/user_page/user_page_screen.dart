@@ -2,6 +2,7 @@ import 'package:finance_guide/authentication/bloc/authentication_bloc.dart';
 import 'package:finance_guide/home/currency/details/currency_details.dart';
 import 'package:finance_guide/home/user_page/favorites/favorites_screen.dart';
 import 'package:finance_guide/home/user_page/notification/notification_screen.dart';
+import 'package:finance_guide/log_out/log_out_screen.dart';
 import 'package:finance_guide/login/view/login_screen.dart';
 import 'package:finance_guide/sign_up/sign_up.dart';
 import 'package:finance_guide/utils/constants.dart';
@@ -40,12 +41,17 @@ class UserPageScreen extends StatelessWidget {
                       ),
                       color: kSignUpUser),
                 )
-              : ImageIcon(
-                  AssetImage(
-                    "assets/launcher/account.png",
+              : GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => LogOutScreen()));
+                  },
+                  child: ImageIcon(
+                    AssetImage(
+                      "assets/launcher/account.png",
+                    ),
+                    color: kWhite,
+                    size: 35,
                   ),
-                  color: kWhite,
-                  size: 35,
                 ),
           title: index
               ? Padding(
@@ -84,8 +90,11 @@ class UserPageScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => FavoritesScreen()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => FavoritesScreen()));
                           },
                           child: ImageIcon(
                             AssetImage("assets/launcher/star.png"),
@@ -115,8 +124,12 @@ class UserPageScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         GestureDetector(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationScreen()));
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        NotificationScreen()));
                           },
                           child: ImageIcon(
                             AssetImage("assets/launcher/notifications.png"),

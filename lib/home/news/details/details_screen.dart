@@ -1,4 +1,5 @@
 import 'package:finance_guide/home/news/news.dart';
+import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class DetailsArgument{
@@ -25,6 +26,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBackground,
       appBar: AppBar(
         elevation: 0,
         title: Text(article.author ?? ''),
@@ -48,13 +50,13 @@ class DetailsScreen extends StatelessWidget {
                 height: 10,
               ),
               Text(article.title ?? '', style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500)),
+                  color: kAppBar,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600)),
               SizedBox(
                 height: 10,
               ),
-              Text(article.description ?? '', style: TextStyle(color: Colors.black54, fontSize: 18))
+              Text(article.description ?? '', style: TextStyle(color: kAppBar, fontSize: 18))
             ],
           ),
         ),

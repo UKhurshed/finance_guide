@@ -39,6 +39,7 @@ class Repository {
         password: password,
       );
     } on Exception {
+      debugPrint("SignUp Failure");
       throw SignUpFailure();
     }
   }

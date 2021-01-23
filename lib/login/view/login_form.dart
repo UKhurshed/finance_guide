@@ -1,3 +1,4 @@
+import 'package:finance_guide/forget_password/forget_password_screen.dart';
 import 'package:finance_guide/login/cubit/login_cubit.dart';
 import 'package:finance_guide/sign_up/view/sign_up_screen.dart';
 import 'package:finance_guide/utils/constants.dart';
@@ -31,11 +32,18 @@ class LoginForm extends StatelessWidget {
           ),
           _PasswordInput(),
           const SizedBox(height: 35.0),
+          _GoogleLoginButton(),
+          const SizedBox(height: 35.0),
           _LoginButton(),
           const SizedBox(height: 10.0),
-          Text(
-            "Забыли пароль?",
-            style: TextStyle(color: kForgetPass, fontSize: 14),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen()));
+            },
+            child: Text(
+              "Забыли пароль?",
+              style: TextStyle(color: kForgetPass, fontSize: 14),
+            ),
           )
           // _SignUpButton(),
           // const SizedBox(height: 10.0),
@@ -157,7 +165,7 @@ class _GoogleLoginButton extends StatelessWidget {
       // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
       icon: const Icon(FontAwesomeIcons.google, color: Colors.blueAccent),
       elevation: 0,
-      color: Color(0xfff4ced9),
+      color: kWhite,
       onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
     );
   }

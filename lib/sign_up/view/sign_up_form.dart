@@ -181,7 +181,7 @@ class _SignUpButton extends StatelessWidget {
                       context.read<SignUpCubit>().signUpFormSubmitted(),
                   color: Colors.white,
                   child: Text(
-                    "Вход",
+                    "Регистрация",
                     style: TextStyle(
                         color: kHintColor,
                         fontSize: 18,

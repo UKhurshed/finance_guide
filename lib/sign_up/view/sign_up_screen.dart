@@ -17,14 +17,6 @@ class SignUpScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: kBackground,
-        // extendBodyBehindAppBar: true,
-        // appBar: AppBar(
-        //   elevation: 0,
-        //   backgroundColor: Colors.transparent,
-        //   iconTheme: IconThemeData(
-        //     color: Color(0xff6a515e),
-        //   ),
-        // ),
         body: SingleChildScrollView(
           child: BlocProvider<SignUpCubit>(
             create: (_) => SignUpCubit(
