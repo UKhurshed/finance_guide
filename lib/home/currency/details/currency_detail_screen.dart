@@ -146,11 +146,11 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
             Center(
               child: Column(
                 children: [
-                  Text('Технические индикаторы', style: TextStyle(color: Colors.white),),
+                  Text('Технический анализ: USD/$symbol', style: TextStyle(color: Colors.white),),
                   SizedBox(
                     height: 5,
                   ),
-                  // Text("Резюме: " + resume ?? '', style: TextStyle(color: Colors.white)),
+                  Text("Резюме: " + resume ?? '', style: TextStyle(color: Colors.white)),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: ListView.separated(
@@ -168,7 +168,7 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
                                 Text(indi[index].text, style: TextStyle(color: Colors.white)),
                               ],
                             ),
-                            title: Text(indiValues[index].text, style: TextStyle(color: Colors.white)),
+                            title: Text(indiValues[index].text, style: TextStyle(color: Colors.white), textAlign: TextAlign.center,),
                             trailing: Text(actions[index].text, style: TextStyle(color: Colors.white)),
                           );
                         }),
@@ -245,6 +245,7 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
       debugPrint("Current: $currentRate");
       debugPrint("change: $change");
       debugPrint("changeptc: $changePtc");
+      resume = document.getElementsByClassName("uppercaseText")[0].firstChild.text;
       
       indi = document.getElementsByClassName("first.left.symbol");
       indi.removeRange(12, 18);

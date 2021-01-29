@@ -37,8 +37,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   final Quote quote;
   var index = 0;
 
-  String instrumentHeader;
-  // String resume;
+  String resume;
   String avgCount;
   String techIndicator;
   String indicatorsSym;
@@ -46,9 +45,6 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   var indi = List();
   var indiValues = List();
   var actions = List();
-  // String resu;
-  // List resu;
-  // List bar;
 
   _QuoteDetailsState(this.quote);
 
@@ -155,9 +151,12 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                           children: [
                             Text('Технический анализ  ${quote.companyName}', style: TextStyle(color: Colors.white)),
                             SizedBox(
-                              height: 5,
+                              height: 10,
                             ),
-                            // Text( "Резюме: " + resume ?? '', style: TextStyle(color: Colors.white)),
+                            Text( "Резюме: " + resume ?? '', style: TextStyle(color: Colors.white, fontSize: 17)),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: ListView.separated(
@@ -266,7 +265,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
       var document = parse(body);
       // resu = document.getElementsByClassName("div.summary")[0].firstChild.text; <span class="buy uppercaseText" title="">Активно покупать</span>
       // bar = document.getElementsByClassName("h2.float_lang_base_1.inlineblock")[0].firstChild.text;
-      // resume = document.getElementsByClassName("buy.uppercaseText")[0].firstChild.text;
+      resume = document.getElementsByClassName("uppercaseText")[0].firstChild.text;
       indi = document.getElementsByClassName("first.left.symbol");
       indiValues = document.getElementsByClassName("right");
       actions = document.getElementsByClassName("left.textNum.bold");
