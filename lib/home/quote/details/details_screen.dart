@@ -7,7 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_candlesticks/flutter_candlesticks.dart';
-import 'package:web_scraper/web_scraper.dart';
+import 'package:html/parser.dart';
+import 'package:http/http.dart' as http;
 
 class Details extends StatelessWidget {
   final Quote quote;
@@ -37,16 +38,17 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   var index = 0;
 
   String instrumentHeader;
-  String resume;
+  // String resume;
   String avgCount;
   String techIndicator;
   String indicatorsSym;
   String indicatorsVal;
-  List indi = new List();
-  List indiValues = new List();
-  List actions = new List();
-  String resu;
-  String bar;
+  var indi = List();
+  var indiValues = List();
+  var actions = List();
+  // String resu;
+  // List resu;
+  // List bar;
 
   _QuoteDetailsState(this.quote);
 
@@ -67,7 +69,7 @@ class _QuoteDetailsState extends State<QuoteDetails> {
         title: Text(quote.companyName ?? '', style: TextStyle(color: kItemUnSelected),),
       ),
       body: SingleChildScrollView(
-        child: resume != null ? Column(
+        child: indi.isNotEmpty ? Column(
           children: [
             Container(
                 child: Row(
@@ -151,24 +153,31 @@ class _QuoteDetailsState extends State<QuoteDetails> {
                     Center(
                         child: Column(
                           children: [
-                            Text(resume ?? '', style: TextStyle(color: Colors.white)),
+                            Text('Технический анализ  ${quote.companyName}', style: TextStyle(color: Colors.white)),
                             SizedBox(
                               height: 5,
                             ),
-                            Text('Технические индикаторы', style: TextStyle(color: Colors.white)),
+                            // Text( "Резюме: " + resume ?? '', style: TextStyle(color: Colors.white)),
                             Padding(
                               padding: const EdgeInsets.all(6.0),
                               child: ListView.separated(
-                                  separatorBuilder: (context, indext) => Divider(color: kItemUnSelected,),
+                                  separatorBuilder: (context, index) => Divider(color: kItemUnSelected,),
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   itemCount: indi.length,
                                   itemBuilder: (context, index) {
                                     return ListTile(
-                                      leading: Text(indi[index], style: TextStyle(color: Colors.white),),
-                                      title: Text(indiValues[index], style: TextStyle(color: Colors.white)),
-                                      trailing: Text(actions[index], style: TextStyle(color: Colors.white)),
+                                      leading: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+
+                                          SizedBox(height: 18,),
+                                          Text(indi[index].text, style: TextStyle(color: Colors.white, fontSize: 16),),
+                                        ],
+                                      ),
+                                      title: Text(indiValues[index].text, style: TextStyle(color: Colors.white)),
+                                      trailing: Text(actions[index].text, style: TextStyle(color: Colors.white)),
                                     );
                                   }),
 
@@ -188,51 +197,60 @@ class _QuoteDetailsState extends State<QuoteDetails> {
   }
 
   Future<void> getElements(String quote) async {
-    final webScraper = WebScraper('https://ru.investing.com');
+    // final webScraper = WebScraper('https://ru.investing.com');
+
     switch (quote) {
       case 'AAPL':
         {
-          if (await webScraper
-              .loadWebPage("/equities/apple-computer-inc-technical")) {
-            fetchElements(webScraper);
+          final response = await http.get("https://ru.investing.com/equities/apple-computer-inc-technical");
+          if(response.statusCode == 200){
+            print("Succes");
+            fetchElements(response.body);
           }
         }
         break;
       case "MSFT":
         {
-          if (await webScraper
-              .loadWebPage("/equities/microsoft-corp-technical")) {
-            fetchElements(webScraper);
+          final response = await http.get("https://ru.investing.com/equities/microsoft-corp-technical");
+          if(response.statusCode == 200){
+            print("Succes");
+            fetchElements(response.body);
           }
         }
         break;
       case "IBM":
         {
-          if (await webScraper.loadWebPage("/equities/ibm-technical")) {
-            fetchElements(webScraper);
+          final response = await http.get("https://ru.investing.com/equities/ibm-technical");
+          if(response.statusCode == 200){
+            print("Succes");
+            fetchElements(response.body);
           }
         }
         break;
       case "ORCL":
         {
-          if (await webScraper.loadWebPage("/equities/oracle-corp-technical")) {
-            fetchElements(webScraper);
+          final response = await http.get("https://ru.investing.com/equities/oracle-corp-technical");
+          if(response.statusCode == 200){
+            print("Succes");
+            fetchElements(response.body);
           }
         }
         break;
       case "HPQ":
         {
-          if (await webScraper
-              .loadWebPage("/equities/hewlett-pack-technical")) {
-            fetchElements(webScraper);
+          final response = await http.get("https://ru.investing.com/equities/hewlett-pack-technical");
+          if(response.statusCode == 200){
+            print("Succes");
+            fetchElements(response.body);
           }
         }
         break;
       case "FB":
         {
-          if (await webScraper
-              .loadWebPage("/equities/facebook-inc-technical")) {
-            fetchElements(webScraper);
+          final response = await http.get("https://ru.investing.com/equities/facebook-inc-technical");
+          if(response.statusCode == 200){
+            print("Succes");
+            fetchElements(response.body);
           }
         }
         break;
@@ -242,34 +260,31 @@ class _QuoteDetailsState extends State<QuoteDetails> {
     }
   }
 
-  void fetchElements(WebScraper webScraper) {
+  void fetchElements(String body) {
 
     setState(() {
-      resume = webScraper.getElement('div.summary', [])[0]['title'].toString();
-      resu = webScraper.getElement("div.summary", []).toString();
-      bar = webScraper.getElement("h2.float_lang_base_1.inlineblock", [])[0]
-      ['title'];
-      final characters = webScraper.getElement("td.first.left.symbol", []);
-      final value = webScraper.getElement("td.right", []);
-      final action = webScraper.getElement("td.left.textNum.bold", []);
+      var document = parse(body);
+      // resu = document.getElementsByClassName("div.summary")[0].firstChild.text; <span class="buy uppercaseText" title="">Активно покупать</span>
+      // bar = document.getElementsByClassName("h2.float_lang_base_1.inlineblock")[0].firstChild.text;
+      // resume = document.getElementsByClassName("buy.uppercaseText")[0].firstChild.text;
+      indi = document.getElementsByClassName("first.left.symbol");
+      indiValues = document.getElementsByClassName("right");
+      actions = document.getElementsByClassName("left.textNum.bold");
+      debugPrint("Indi: ${indi.first.text}");
 
-      for (var j in action) {
-        actions.add(j['title']);
-      }
-
-      for (var i in characters) {
-        indi.add(i['title']);
-      }
-
-      for (var k in value) {
-        indiValues.add(k['title']);
-      }
       indi.removeRange(12, 18);
       actions.removeRange(12, 18);
-      debugPrint("TechScreen: $resume");
-      debugPrint("Indi: $indi");
-      debugPrint("IndiVal: $indiValues");
-      debugPrint("Act: $actions");
+      indiValues.removeAt(0);
+      indiValues.removeAt(12);
+
+      // for(var k in indi){
+      //   debugPrint("Act: ${k.text}");
+      // }
+      //
+      // for(var k in actions){
+      //   debugPrint("Act: ${k.text}");
+      // }
+
     });
   }
 

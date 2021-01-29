@@ -11,8 +11,8 @@ class CurrencyDetailRepository{
   Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
   Future<DetailRate> getDaily(String curr) async{
-    String start = "2020-12-16";
-    String end = "2020-12-28";
+    String start = "2021-01-17";
+    String end = "2021-01-29";
 
     DetailRate rates = new DetailRate();
     final SharedPreferences preferences = await prefs;
@@ -40,8 +40,8 @@ class CurrencyDetailRepository{
   }
 
   Future<DetailRate> getWeekly(String curr) async{
-    String start = "2020-11-12";
-    String end = "2020-12-28";
+    String start = "2020-12-13";
+    String end = "2021-01-28";
 
     DetailRate rates = new DetailRate();
     final SharedPreferences preferences = await prefs;
@@ -70,8 +70,8 @@ class CurrencyDetailRepository{
 
 
   Future<DetailRate> getYearly(String curr) async{
-    String start = "2019-08-01";
-    String end = "2020-12-28";
+    String start = "2019-09-01";
+    String end = "2021-01-29";
 
     DetailRate rates = new DetailRate();
     final SharedPreferences preferences = await prefs;
@@ -100,7 +100,7 @@ class CurrencyDetailRepository{
 
   Future<DetailRate> getFiveYear(String curr) async{
     String start = "2013-12-28";
-    String end = "2020-12-28";
+    String end = "2021-01-29";
 
     DetailRate rates = new DetailRate();
     final SharedPreferences preferences = await prefs;

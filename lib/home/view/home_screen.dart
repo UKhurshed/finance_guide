@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    pageList.add(QuoteBuilder());
+    pageList.add(QuoteMain());
     pageList.add(Currency());
     pageList.add(News());
     pageList.add(UserPageScreen());
@@ -70,8 +70,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-/*
-PageStorage(
-        child: pages[_currentIndex],
-        bucket: bucket,
- */
+

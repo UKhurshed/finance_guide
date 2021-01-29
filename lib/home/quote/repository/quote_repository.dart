@@ -13,37 +13,6 @@ class QuoteRepository {
   final token = 'pk_d7aa7a3fbda847ba96cea288e9e52c94';
   final symbols = ['aapl', 'msft', 'ibm', 'orcl', 'hpq', 'fb'];
 
-  //'baba', 'nvda', 'amzn'
-  // Stream<List<String>> sum = ['aapl', 'msft', 'amzn', 'googl', 'fb', 'baba', 'ibm', 'nvda', 'orcl', 'hpq'];
-
-
-  // Future<Quote> getQuote(String sym) async {
-  //   Quote quote;
-  //   String fileName = "$sym.json";
-  //   var cacheDir = await getTemporaryDirectory();
-  //
-  //   if(await File(cacheDir.path + "/" + fileName).exists()){
-  //     var jsonData = File(cacheDir.path + "/" + fileName).readAsStringSync();
-  //     quote = Quote.fromJson(jsonDecode(jsonData));
-  //     return quote;
-  //   }else{
-  //     try{
-  //       var response = await http.get("$base_url/$sym/quote?token=$token");
-  //       if(response.statusCode == 200){
-  //         debugPrint("Response Data: ${response.body}");
-  //         var tempDir = await getTemporaryDirectory();
-  //         File file = new File(tempDir.path + "/" + fileName);
-  //         file.writeAsString(response.body, flush: true, mode: FileMode.write);
-  //         quote = Quote.fromJson(jsonDecode(response.body));
-  //       }
-  //       return quote;
-  //     }catch(error){
-  //       debugPrint("Error: #$error");
-  //       throw Exception(error);
-  //     }
-  //   }
-  // }
-
   Future<List<Quote>> getQuote() async {
     List<Quote> quote = [];
 

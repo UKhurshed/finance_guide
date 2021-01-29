@@ -32,12 +32,12 @@ dependencies:
   http: ^0.12.2
   shared_preferences: ^0.5.12+4
   path_provider: ^1.6.24
-  web_scraper: ^0.0.8
   flutter_candlesticks: ^0.1.4
   charts_flutter: ^0.9.0
   provider: ^4.3.2+3
   animations: ^1.1.0
   firebase_auth: ^0.18.3
+  html: ^0.14.0+4
   auth_repository:
     path: packages/auth_repository
   # The following adds the Cupertino Icons font to your application.

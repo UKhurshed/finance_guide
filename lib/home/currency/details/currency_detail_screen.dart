@@ -2,7 +2,8 @@ import 'package:finance_guide/home/currency/details/cubit/curr_detail_cubit.dart
 import 'package:finance_guide/utils/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:web_scraper/web_scraper.dart';
+import 'package:html/parser.dart';
+import 'package:http/http.dart' as http;
 
 import 'currency_details.dart';
 
@@ -145,11 +146,11 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
             Center(
               child: Column(
                 children: [
-                  Text(resume ?? '', style: TextStyle(color: Colors.white)),
+                  Text('Технические индикаторы', style: TextStyle(color: Colors.white),),
                   SizedBox(
                     height: 5,
                   ),
-                  Text('Технические индикаторы', style: TextStyle(color: Colors.white),),
+                  // Text("Резюме: " + resume ?? '', style: TextStyle(color: Colors.white)),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: ListView.separated(
@@ -160,9 +161,15 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
                         itemCount: indi.length,
                         itemBuilder: (context, index) {
                           return ListTile(
-                            leading: Text(indi[index], style: TextStyle(color: Colors.white)),
-                            title: Text(indiValues[index], style: TextStyle(color: Colors.white)),
-                            trailing: Text(actions[index], style: TextStyle(color: Colors.white)),
+                            leading: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 19,),
+                                Text(indi[index].text, style: TextStyle(color: Colors.white)),
+                              ],
+                            ),
+                            title: Text(indiValues[index].text, style: TextStyle(color: Colors.white)),
+                            trailing: Text(actions[index].text, style: TextStyle(color: Colors.white)),
                           );
                         }),
 
@@ -218,58 +225,38 @@ class _CurrencyDetailScreenState extends State<CurrencyDetailScreen> {
 
   Future<void> getElement(String sym) async{
     String symbol = sym.toLowerCase();
-    final webScraper = WebScraper("https://www.investing.com");
-    if(await webScraper.loadWebPage("/currencies/usd-$symbol-technical")){
+    final response = await http.get("https://ru.investing.com/currencies/usd-$symbol-technical");
+    if(response.statusCode == 200){
       debugPrint('URL /currencies/usd-$symbol-technical');
-      fetchElement(webScraper);
+      fetchElement(response.body);
     }
   }
 
-  void fetchElement(WebScraper webScraper){
-    String current;
+  void fetchElement(String body){
+
     setState(() {
-      current = webScraper.getElement('div.top.bold.inlineblock', [])[0]["title"].toString();
-      var cur = current
-          .split(new RegExp(r'(?:\r?\n|\r)'))
-          .where((s) => s.trim().length != 0).toList();
-      var first = cur.first;
-      var sec = cur.elementAt(1);
-      var last = cur.last;
-      currentRate = first.replaceAll(RegExp(' +'), ' ');
-      change = sec.replaceAll(RegExp(' +'), ' ');
-      changePtc = last.replaceAll(RegExp(' +'), ' ');
+      var document = parse(body);
 
-      resume = webScraper.getElement('div.summary', [])[0]['title'].toString();
-      resu = webScraper.getElement("div.summary", []).toString();
-      bar = webScraper.getElement("h2.float_lang_base_1.inlineblock", [])[0]
-      ['title'];
-      final characters = webScraper.getElement("td.first.left.symbol", []);
-      final value = webScraper.getElement("td.right", []);
-      final action = webScraper.getElement("td.left.textNum.bold", []);
+      
+      currentRate = document.getElementsByClassName("top.bold.inlineblock")[0].text.replaceAll("\n", '').split(' ')[12].replaceAll(",", ".");
+      change = document.getElementsByClassName("top.bold.inlineblock")[0].text.replaceAll("\n", '').split(' ')[36].replaceAll(",", ".");
+      changePtc = document.getElementsByClassName("top.bold.inlineblock")[0].text.replaceAll("\n", '').split(' ')[60].replaceAll(",", ".");
 
-      for (var j in action) {
-        actions.add(j['title']);
-      }
-
-      for (var i in characters) {
-        indi.add(i['title']);
-      }
-
-      for (var k in value) {
-        indiValues.add(k['title']);
-      }
+      debugPrint("Current: $currentRate");
+      debugPrint("change: $change");
+      debugPrint("changeptc: $changePtc");
+      
+      indi = document.getElementsByClassName("first.left.symbol");
       indi.removeRange(12, 18);
-      actions.removeRange(12, 18);
-      debugPrint("TechScreen: $resume");
-      debugPrint("Indi: $indi");
-      debugPrint("IndiVal: $indiValues");
-      debugPrint("Act: $actions");
+      
+      indiValues = document.getElementsByClassName("right");
+      indiValues.removeAt(0);
+      // indiValues.removeRange(12, 18);
+      
+      actions = document.getElementsByClassName("left.textNum.bold");
+      // actions.removeRange(12, 18);
 
-      // current = webScraper.getElement('span.arial_20.pid-2186-pc.redFont', []);
     });
-
-    // current.split(new RegExp(r'(?:\r?\n|\r)')).where((element) => element.trim().length != 0).join('\n');
-    debugPrint('Current $currentRate, $change, $changePtc');
   }
 
   _series(List<LineCharts> data) {

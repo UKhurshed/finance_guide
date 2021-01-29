@@ -15,6 +15,7 @@ const kSignUpUser = Color(0xFFA154F2);
 const kTitleGreen = Color(0xFF6FCF97);
 const kLiked = Color(0xFF3C444C);
 const kEtherColor = Color(0xFFF6F6F6);
+const kAppBarMain = Color(0xFF747D88);
 
 // Colos that use in our app
 const kSecondaryColor = Color(0xFFFE6D8E);

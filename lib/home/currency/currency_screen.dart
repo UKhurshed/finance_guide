@@ -46,7 +46,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
     return Scaffold(
       backgroundColor: kBackground,
       appBar: AppBar(
-        title: Text('Форекс'),
+        title: Text('Форекс API'),
       ),
       body:
           BlocBuilder<CurrencyCubit, CurrencyState>(builder: (context, state) {

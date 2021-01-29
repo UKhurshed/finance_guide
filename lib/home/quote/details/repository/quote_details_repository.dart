@@ -15,8 +15,8 @@ class HistoryRepository {
 
   Future<Item> getWeekly(String sym) async {
     String interval = "daily";
-    String start = "2020-12-04";
-    String end = "2020-12-14";
+    String start = "2021-01-19";
+    String end = "2021-01-29";
 
     Item items = Item();
     final SharedPreferences preferences = await prefs;
@@ -48,8 +48,8 @@ class HistoryRepository {
 
   Future<Item> getMonthly(String sym) async {
     String interval = "daily";
-    String start = "2020-11-14";
-    String end = "2020-12-14";
+    String start = "2020-12-29";
+    String end = "2021-01-29";
 
     Item items = Item();
     final SharedPreferences preferences = await prefs;
@@ -80,8 +80,8 @@ class HistoryRepository {
 
   Future<Item> getYear(String sym) async {
     String interval = "daily";
-    String start = "2019-12-01";
-    String end = "2020-12-14";
+    String start = "2020-01-29";
+    String end = "2021-01-29";
 
     Item items = Item();
     final SharedPreferences preferences = await prefs;
@@ -112,8 +112,8 @@ class HistoryRepository {
 
   Future<Item> getFiveYear(String sym) async{
     String interval = "monthly";
-    String start = "2015-11-14";
-    String end = "2020-12-14";
+    String start = "2016-01-29";
+    String end = "2021-01-29";
 
     Item items = Item();
     final SharedPreferences preferences = await prefs;
