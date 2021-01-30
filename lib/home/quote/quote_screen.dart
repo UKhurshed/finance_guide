@@ -1,3 +1,4 @@
+import 'package:finance_guide/home/currency/currency_screen.dart';
 import 'package:finance_guide/home/currency/details/currency_details.dart';
 import 'package:finance_guide/home/quote/crypto_currencies/crypto_currencies_screen.dart';
 import 'package:finance_guide/home/quote/indices_futures/indices_futures_screen.dart';
@@ -20,7 +21,7 @@ class QuoteMain extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 8,
+      length: 9,
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(46.5),
@@ -28,7 +29,8 @@ class QuoteMain extends StatelessWidget implements PreferredSizeWidget {
             backgroundColor: kAppBarMain,
             bottom: TabBar(
               tabs: [
-                Tab(text: 'Индексы API',),
+                Tab(text: 'Акции A',),
+                Tab(text: 'Форекс A',),
                 Tab(text: 'Индексы'),
                 Tab(text: 'Фьючерсы'),
                 Tab(text: 'Акции'),
@@ -51,6 +53,7 @@ class QuoteMain extends StatelessWidget implements PreferredSizeWidget {
         body: TabBarView(
           children: [
             QuoteBuilder(),
+            Currency(),
             MajorIndicesScreen(),
             IndicesFuturesScreen(),
             MostActiveStocksScreen(),

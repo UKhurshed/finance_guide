@@ -45,9 +45,6 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackground,
-      appBar: AppBar(
-        title: Text('Форекс API'),
-      ),
       body:
           BlocBuilder<CurrencyCubit, CurrencyState>(builder: (context, state) {
         if (state is CurrencyError) {
